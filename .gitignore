@@ -1,4 +1,6 @@
 .vscode
+# built binary
+go-mode
 
 # Binaries for programs and plugins
 *.exe
