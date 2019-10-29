@@ -21,12 +21,16 @@ func Response(msg interface{}) string {
 	(the `:=` is a shorthand for variable declaration and initialization)
 	currentTime := time.Now().Unix()
 	*/
-	currentTime := strconv.FormatInt(time.Now().Unix(), 10)
 
-	// print the memory address (via using `&`) for fun
-	// also note there's a `*` to use pointer
+	currentTime := "replace the time"
+
+	// the memory address (via using `&`) of variable `currentTime`
 	p := &currentTime
-	println(p)
+	// println(p)
+
+	// point the memory address(p) via `*` to the real time string
+	*p = strconv.FormatInt(time.Now().Unix(), 10)
+	// afterwards anywhere we use the variable `currentTime` will be pointed to this above string value
 
 	// const has no type until given one
 	// and the value must be decided in compile time

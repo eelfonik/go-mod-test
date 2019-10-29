@@ -27,6 +27,7 @@ func main() {
 		- Zero value for int array is 0, whereas zero value for int slice is nil
 	*/
 
+	// map is just a classic map
 	msgs2 := map[int]string{1: "How are you going? \n", 2: "We're in trouble \n"}
 
 	fmt.Println(test.Response(msg))
@@ -36,7 +37,7 @@ func main() {
 
 	// for loop is the only way to iterate sth in go
 	// https://stackoverflow.com/questions/48693172/how-do-i-iterate-over-an-array-of-a-custom-type-in-go
-	for _, msg := range msgs {
+	for _, msg := range msgs2 {
 		fmt.Printf(test.Response(msg))
 	}
 }
