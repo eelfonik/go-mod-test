@@ -1,10 +1,27 @@
-package test
+package data
 
 import (
 	"reflect"
 	"strconv"
 	"time"
 )
+
+func handleNonPrimitive(val interface{}) string {
+	// as type switch only work for specific type, for array/slice/map, you need to use reflect
+	// it's like the metadata of var
+	v := reflect.ValueOf(val)
+	switch v.Kind() {
+	case reflect.Slice:
+		// how to check the element type & value inside an slice ?
+		return "weird thing here we got a slice"
+	case reflect.Array:
+		return "An array!!"
+	case reflect.Map:
+		return "The alien passing a map"
+	default:
+		return "nothing here"
+	}
+}
 
 // How to declare union type in go ??
 
@@ -29,30 +46,17 @@ func Response(msg interface{}) string {
 	// println(p)
 
 	// point the memory address(p) via `*` to the real time string
-	*p = strconv.FormatInt(time.Now().Unix(), 10)
+	*p = strconv.FormatInt(time.Now().Unix(), 10) + "\n"
 	// afterwards anywhere we use the variable `currentTime` will be pointed to this above string value
 
 	// const has no type until given one
 	// and the value must be decided in compile time
-	const res = "hello alien "
+	const res = "hello alien \n"
 
-	// function def inside function: assign the func to a local variable
-	handleNonPrimitive := func(val interface{}) string {
-		// as type switch only work for specific type, for array/slice/map, you need to use reflect
-		// it's like the metadata of var
-		v := reflect.ValueOf(val)
-		switch v.Kind() {
-		case reflect.Slice:
-			// how to check the element type & value inside an slice ?
-			return "weird thing here we got a slice"
-		case reflect.Array:
-			return "An array!!"
-		case reflect.Map:
-			return "The alien passing a map"
-		default:
-			return "nothing here"
-		}
-	}
+	/*
+		function def inside function: assign the func to a local variable
+		localFunc := func(val interface{}) {}
+	*/
 
 	// use interface for type switch
 	// see https://tour.golang.org/methods/16
@@ -65,8 +69,4 @@ func Response(msg interface{}) string {
 	default:
 		return handleNonPrimitive(msgType)
 	}
-}
-
-func handleNonPrimitive(val interface{}) string {
-	return "nothing outside"
 }
